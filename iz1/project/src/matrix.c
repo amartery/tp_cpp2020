@@ -64,8 +64,6 @@ void print_mat(const Matrix* matrix) {
     }
 }
 
-
-
 int free_matrix(Matrix* matrix) {
     if (matrix == NULL) {
         return 1;
@@ -77,33 +75,6 @@ int free_matrix(Matrix* matrix) {
     free(matrix);
     return 0;
 }
-
-// Basic operations
-/*
-int get_rows(const Matrix* matrix, size_t* rows) {
-    if (matrix == NULL || rows == NULL) {
-        return 1;
-    }
-    *rows = matrix->rows;
-    return 0;
-}
-
-int get_cols(const Matrix* matrix, size_t* cols) {
-    if (matrix == NULL || cols == NULL) {
-        return 1;
-    }
-    *cols = matrix->columns;
-    return 0;
-}
-
-int get_elem(const Matrix* matrix, size_t row, size_t col, double* val) {
-    if (matrix == NULL || val == NULL) {
-        return 1;
-    }
-    *val = matrix->elements[row][col];
-    return 0;
-}
-*/
 
 double* get_one_dim_arr(const Matrix* matrix, size_t size) {
     double* one_dim_arr = (double*)malloc(sizeof(double) * size);
@@ -141,8 +112,8 @@ int get_most_popular_elem(const Matrix* matrix, double* most_popular_elem) {
             }
         }
         if (count > max_count) {
-	         index_most_popular_elem = i;
-             max_count = count;
+            index_most_popular_elem = i;
+            max_count = count;
         }
     }
 

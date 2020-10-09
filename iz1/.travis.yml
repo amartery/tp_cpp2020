@@ -1,0 +1,12 @@
+language: cpp
+compiler:
+    - gcc
+notifications:
+    email: false
+sudo: false
+script:
+    - ./linters/run.sh —local
+    - cmake .
+    - make clean && make
+    - ./tests
+    - ./iz1

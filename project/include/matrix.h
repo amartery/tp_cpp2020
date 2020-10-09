@@ -1,5 +1,5 @@
-#ifndef IZ1_MATRIX_H
-#define IZ1_MATRIX_H
+#ifndef PROJECT_INCLUDE_MATRIX_H_
+#define PROJECT_INCLUDE_MATRIX_H_
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,4 +18,4 @@ int free_matrix(Matrix* matrix);
 void print_mat(const Matrix* matrix);
 int get_most_popular_elem(const Matrix* matrix, double* most_popular_elem);
 
-#endif  // IZ1_MATRIX_H
+#endif  // PROJECT_INCLUDE_MATRIX_H_

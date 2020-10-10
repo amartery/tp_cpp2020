@@ -1,12 +1,33 @@
-language: cpp
+dist: trusty
+sudo: required
+
+language: c
+
+os:
+  - linux
+
 compiler:
-    - gcc
-notifications:
-    email: false
-sudo: false
+  - gcc
+
+addons:
+  apt:
+    packages:
+      - cmake
+      - valgrind
+      - cppcheck
+
+before_script:
+  - sudo apt-get install -y libgtest-dev
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt && sudo make
+  - sudo cp *.a /usr/lib
+  - cd "${TRAVIS_BUILD_DIR}"
+  - cd IZ1
+  - cmake .
+  - make
+
 script:
-    - ./linters/run.sh —local
-    - cmake .
-    - make clean && make
-    - ./tests
-    - ./iz1
+  - ./linters/run.sh --local
+  - valgrind --track-origins=yes --leak-check=full ./tests
+  - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
+

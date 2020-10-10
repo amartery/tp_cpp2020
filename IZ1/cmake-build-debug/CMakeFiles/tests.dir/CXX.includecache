@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../project/include/matrix.h
+stdio.h
+-
+stdlib.h
+-
+
+/home/steve/CLionProjects/iz1/project/tests/main.cpp
+gtest/gtest.h
+-
+matrix.h
+/home/steve/CLionProjects/iz1/project/tests/matrix.h
+

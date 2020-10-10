@@ -1,0 +1,1 @@
+/usr/bin/cc -Wall -Wextra -Werror -g   CMakeFiles/iz1.dir/project/src/main.c.o CMakeFiles/iz1.dir/project/src/matrix.c.o  -o iz1 

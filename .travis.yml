@@ -27,7 +27,6 @@ before_script:
   - make
 
 script:
-  - ./linters/run.sh --local
   - valgrind --track-origins=yes --leak-check=full ./tests
   - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
 

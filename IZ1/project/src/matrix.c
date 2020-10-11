@@ -1,5 +1,37 @@
 #include "matrix.h"
+#define MAX_DOUBLE_LENGTH 19
+#define MAX_SIZE_T_LENGTH 5
 
+
+int get_rows_n_cols_n(FILE* ptr, size_t* rows_n, size_t* cols_n) {
+    if (ptr == NULL) {
+        return 1;
+    }
+    char buffer_rows_n[MAX_SIZE_T_LENGTH];
+    char buffer_cols_n[MAX_SIZE_T_LENGTH];
+    int flag_input = fscanf(ptr, "%4s %4s", buffer_rows_n, buffer_cols_n);
+    if (flag_input == -1) {
+        return 1;
+    } else {
+        *rows_n = strtoul(buffer_rows_n, NULL, 10);
+        *cols_n = strtoul(buffer_cols_n, NULL, 10);
+        return 0;
+    }
+}
+
+int get_double(FILE* ptr, double* value) {
+    if (ptr == NULL) {
+        return 1;
+    }
+    char buffer_double[MAX_DOUBLE_LENGTH];
+    int flag_input = fscanf(ptr, "%18s", buffer_double);
+    if (flag_input == -1) {
+         *value = 0;
+    } else {
+        *value = strtod(buffer_double, NULL);
+    }
+    return 0;
+}
 
 // Init/release operations
 Matrix* create_matrix_from_file(const char* path_file) {
@@ -7,8 +39,12 @@ Matrix* create_matrix_from_file(const char* path_file) {
     if (ptr == NULL) {
         return NULL;
     } else {
-        size_t rows_n, cols_n;
-        fscanf(ptr, "%zu %zu", &rows_n, &cols_n);
+        size_t rows_n = 0, cols_n = 0;
+        int flag = get_rows_n_cols_n(ptr, &rows_n, &cols_n);
+        if (flag == 1 || rows_n == 0 || cols_n == 0) {
+            fclose(ptr);
+            return NULL;
+        }
         Matrix* temp = create_matrix(rows_n, cols_n);
         if (temp == NULL) {
             fclose(ptr);
@@ -16,7 +52,7 @@ Matrix* create_matrix_from_file(const char* path_file) {
         }
         for (size_t i = 0; i < temp->rows; i++) {
             for (size_t j = 0; j < temp->columns; j++) {
-                fscanf(ptr, "%lf", &temp->elements[i][j]);
+                get_double(ptr, &temp->elements[i][j]);
             }
         }
         fclose(ptr);

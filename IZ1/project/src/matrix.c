@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include <assert.h>
 #define MAX_DOUBLE_LENGTH 19
 #define MAX_SIZE_T_LENGTH 5
 #define FAILURE 1
@@ -130,9 +129,9 @@ double* get_one_dim_arr(const Matrix* matrix, size_t size) {
     return one_dim_arr;
 }
 
-double get_most_popular_elem(const Matrix* matrix) {
-    assert(matrix != NULL);
-    size_t size_one_dim_arr = matrix->rows * matrix->columns;
+double get_most_popular_elem(const Matrix* matrix, size_t rows_n, size_t cols_n) {
+    assert(matrix != NULL && rows_n != 0 && cols_n != 0);
+    size_t size_one_dim_arr = rows_n * cols_n;
     double* one_dim_arr = get_one_dim_arr(matrix, size_one_dim_arr);
     assert(one_dim_arr != NULL);
 

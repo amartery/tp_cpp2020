@@ -16,6 +16,6 @@ Matrix* create_matrix(size_t rows, size_t cols);
 int free_matrix(Matrix* matrix);
 
 void print_mat(const Matrix* matrix);
-int get_most_popular_elem(const Matrix* matrix, double* most_popular_elem);
+double get_most_popular_elem(const Matrix* matrix);
 
 #endif  // PROJECT_INCLUDE_MATRIX_H_

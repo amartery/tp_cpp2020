@@ -1,36 +1,39 @@
 #include "matrix.h"
+#include <assert.h>
 #define MAX_DOUBLE_LENGTH 19
 #define MAX_SIZE_T_LENGTH 5
+#define FAILURE 1
+#define SUCCESS 0
 
 
 int get_rows_n_cols_n(FILE* ptr, size_t* rows_n, size_t* cols_n) {
     if (ptr == NULL) {
-        return 1;
+        return FAILURE;
     }
     char buffer_rows_n[MAX_SIZE_T_LENGTH];
     char buffer_cols_n[MAX_SIZE_T_LENGTH];
-    int flag_input = fscanf(ptr, "%4s %4s", buffer_rows_n, buffer_cols_n);
+    int flag_input = fscanf(ptr, "%s %s", buffer_rows_n, buffer_cols_n);
     if (flag_input == -1) {
-        return 1;
+        return FAILURE;
     } else {
         *rows_n = strtoul(buffer_rows_n, NULL, 10);
         *cols_n = strtoul(buffer_cols_n, NULL, 10);
-        return 0;
+        return SUCCESS;
     }
 }
 
 int get_double(FILE* ptr, double* value) {
     if (ptr == NULL) {
-        return 1;
+        return FAILURE;
     }
     char buffer_double[MAX_DOUBLE_LENGTH];
-    int flag_input = fscanf(ptr, "%18s", buffer_double);
+    int flag_input = fscanf(ptr, "%s", buffer_double);
     if (flag_input == -1) {
          *value = 0;
     } else {
         *value = strtod(buffer_double, NULL);
     }
-    return 0;
+    return SUCCESS;
 }
 
 // Init/release operations
@@ -102,14 +105,14 @@ void print_mat(const Matrix* matrix) {
 
 int free_matrix(Matrix* matrix) {
     if (matrix == NULL) {
-        return 1;
+        return FAILURE;
     }
     for (size_t i = 0; i < matrix->rows; i++) {
         free(matrix->elements[i]);
     }
     free(matrix->elements);
     free(matrix);
-    return 0;
+    return SUCCESS;
 }
 
 double* get_one_dim_arr(const Matrix* matrix, size_t size) {
@@ -127,15 +130,11 @@ double* get_one_dim_arr(const Matrix* matrix, size_t size) {
     return one_dim_arr;
 }
 
-int get_most_popular_elem(const Matrix* matrix, double* most_popular_elem) {
-    if (matrix == NULL) {
-        return 1;
-    }
+double get_most_popular_elem(const Matrix* matrix) {
+    assert(matrix != NULL);
     size_t size_one_dim_arr = matrix->rows * matrix->columns;
     double* one_dim_arr = get_one_dim_arr(matrix, size_one_dim_arr);
-    if (one_dim_arr == NULL) {
-        return 1;
-    }
+    assert(one_dim_arr != NULL);
 
     size_t index_most_popular_elem = 0;
     int max_count = 1;
@@ -152,9 +151,9 @@ int get_most_popular_elem(const Matrix* matrix, double* most_popular_elem) {
             max_count = count;
         }
     }
-
-    *most_popular_elem = one_dim_arr[index_most_popular_elem];
+    double result = one_dim_arr[index_most_popular_elem];
     free(one_dim_arr);
-    return 0;
+    return result;
 }
+
 

@@ -11,8 +11,7 @@ TEST(get_most_popular_elem, test1) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, -5.940000);
@@ -24,8 +23,7 @@ TEST(get_most_popular_elem, test2) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, 345.000000);
@@ -37,8 +35,7 @@ TEST(get_most_popular_elem, test3) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, 1.000000);
@@ -50,8 +47,7 @@ TEST(get_most_popular_elem, test4) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, 1.000000);
@@ -63,8 +59,7 @@ TEST(get_most_popular_elem, test5) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, 1.000000);
@@ -76,8 +71,8 @@ TEST(get_most_popular_elem, test6) {
     if (mat == NULL) {
         printf("couldn't open the file\n");
     }
-    double result = 0;
-    get_most_popular_elem(mat, &result);
+    print_mat(mat);
+    double result = get_most_popular_elem(mat);
     free_matrix(mat);
 
     ASSERT_EQ(result, 0.000000);
@@ -87,4 +82,5 @@ int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
 

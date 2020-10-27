@@ -52,3 +52,12 @@ From_file* read_file(const char* file_path) {
     fclose(file);
     return result_arr;
 }
+
+int free_arr_from_file(From_file* ptr) {
+    if (ptr == NULL) {
+        return FAILURE;
+    }
+    free(ptr->temperature_array);
+    free(ptr);
+    return SUCCESS;
+}

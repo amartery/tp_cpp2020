@@ -132,6 +132,7 @@ TEST(comparison_MT_ST, test13) {
     std::chrono::duration<double> diff_MT = end - start;
 
     sleep(1);
+    free_arr_from_file(arr);
 
     std::cout << "Результаты:" << std::endl;
     std::cout << "Время работы однопоточного алгоритма: " << diff_ST.count() << std::endl;

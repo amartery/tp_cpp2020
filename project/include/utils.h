@@ -27,5 +27,6 @@ typedef struct {
 int get_arr_size(FILE* ptr, size_t* arr_size);
 int get_int(FILE* ptr);
 From_file* read_file(const char* file_path);
+int free_arr_from_file(From_file* ptr);
 
 #endif //IZ2_UTILS_H

@@ -13,7 +13,6 @@ def sys_argv_input():
             return None
     return {'size': result[0], 'min_val': result[1], 'max_val': result[2]}
 
-
 if __name__ == "__main__":
     if len(sys.argv) == 4:
         argv_coefficients = sys_argv_input()

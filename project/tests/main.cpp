@@ -141,6 +141,33 @@ TEST(comparison_MT_ST, test13) {
     ASSERT_EQ(res_ST, res_MT);
 }
 
+// тест: сравнение результатов и замер времени на монотонно возрастающей последовательности
+TEST(comparison_MT_ST, test14) {
+    From_file* arr = read_file(SOURCE_DIR"/project/tests/data/test1.txt");
+    assert(arr != nullptr);
+
+    auto start = std::chrono::system_clock::now();
+    int res_ST = ST_calculate_temperature_jump(arr->temperature_array, arr->arr_size);
+    auto end = std::chrono::system_clock::now();
+    std::chrono::duration<double> diff_ST = end - start;
+
+    start = std::chrono::system_clock::now();
+    int res_MT = MT_calculate_temperature_jump(arr->temperature_array,
+                                               arr->arr_size,
+                                               2);
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> diff_MT = end - start;
+
+    sleep(3);
+    free_arr_from_file(arr);
+
+    std::cout << "Результаты:" << std::endl;
+    std::cout << "Время работы однопоточного алгоритма: " << diff_ST.count() << std::endl;
+    std::cout << "Время работы многопоточного алгоритма: " << diff_MT.count() << std::endl;
+    std::cout << "res_ST: " << res_ST << " " << "res_MT: " << res_MT << std::endl;
+    ASSERT_EQ(res_ST, res_MT);
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

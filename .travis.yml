@@ -22,9 +22,11 @@ before_script:
   - sudo cmake CMakeLists.txt && sudo make
   - sudo cp *.a /usr/lib
   - cd "${TRAVIS_BUILD_DIR}"
+  - cd IZ1
   - cmake .
   - make
 
 script:
   - valgrind --track-origins=yes --leak-check=full ./tests
   - cppcheck --enable=warning,performance,portability,style --language=c++ ./project
+
